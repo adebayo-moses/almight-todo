@@ -40,7 +40,7 @@ const addTodo = () => {
   }
 
 onMounded(() => {
-  name.value = localStorage.getItem('name') | | ''
+  name.value = localStorage.getItem('name') || ''
   todos.value = JSON.parse(localStorage.getItem('todos')) || []
 });
 </script>
