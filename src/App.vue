@@ -16,8 +16,32 @@ watch(name, (newVal) => {
   localStorage.setItem('name', newVal);
 });
 
+watch(todos, (newVal) => {
+  localStorage.setItem('todos', JSON.stringify(newVal))
+}, {
+  deep: true
+})
+
+const addTodo = () => {
+  if (input_content.value.trim() === ' ' || input_category.value === null) {
+    return
+  }
+
+  todos.value.push({
+    content: input_content.value,
+    category: input_category.value,
+    done: false,
+    editable: false,
+    createdAt: new Date().getTime()
+  })
+
+  const remoteTodo = (todo) => {
+    todos.value = todos.value.filter((t) => t !== todo)
+  }
+
 onMounded(() => {
-  name.value;
+  name.value = localStorage.getItem('name') | | ''
+  todos.value = JSON.parse(localStorage.getItem('todos')) || []
 });
 </script>
 
